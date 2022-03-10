@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
   FaHeart,
@@ -9,21 +9,25 @@ import {
 } from 'react-icons/fa';
 import Img1 from '../assets/pic1.jpeg';
 
-function ReviewDetailContent() {
+const ReviewDetailContent = React.memo(function ReviewDetailContent(props) {
   const [isLiked, setIsLiked] = useState(false);
+  // 좋아요 값 처리 부모 요소에서!
 
   const onClickLikeButton = () => {
     setIsLiked((prev) => !prev);
   };
+  useEffect(() => {
+    console.log(props.review);
+  }, []);
 
   return (
     <ContentWrapper>
       <Top>
-        <Title>너무 예뻐요</Title>
-        <Date>2022-03-10</Date>
+        <Title>{props.review.title}</Title>
+        <Date>{props.review.date}</Date>
       </Top>
       <ImageWrapper>
-        <img src={Img1} alt="리뷰_이미지_1" />
+        <img src={props.review.imgUrl} alt={`리뷰_이미지_${props.review.id}`} />
       </ImageWrapper>
       <ImageInfoBox>
         <div>
@@ -43,15 +47,17 @@ function ReviewDetailContent() {
         </Rating>
         <ReviewContent>
           <p>
-            리뷰평
+            {props.review.content}
+            {/* 리뷰평
             <br />
-            어쩌구 저쩌구 ~!
+            어쩌구 저쩌구 ~! */}
           </p>
         </ReviewContent>
       </ImageInfoBox>
     </ContentWrapper>
   );
-}
+});
+
 const ContentWrapper = styled.section`
   width: 100%;
   height: 100%;
