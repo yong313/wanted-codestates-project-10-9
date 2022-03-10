@@ -1,4 +1,6 @@
 import React from 'react';
+import Styled from 'styled-components';
+import CommentBox from '../components/comments/CommentBox';
 
 import styled from 'styled-components';
 import GridList from '../components/GridList';
@@ -8,9 +10,11 @@ export default function Main() {
     <Wrapper>
     <Sort />
       <GridList />
+      <Container>
+       <CommentBox />
+      </Container>
+   
     </Wrapper>
-
-
 
   );
 }
@@ -18,4 +22,13 @@ export default function Main() {
 const Wrapper = styled.div`
   width: 100%;
   position:relative;
+  `
+  
+const Container = Styled.div`
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `;
