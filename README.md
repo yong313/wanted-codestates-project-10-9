@@ -12,6 +12,8 @@
 
 ### 😎 &nbsp; 문제 설명
 
+Figma [링크](https://www.figma.com/file/5bubLhb2Ldcg6HkTwBsADU/%ED%85%8C%EC%8A%A4%ED%8A%B8?node-id=0%3A1)
+
 - 작성 예정
 
 
