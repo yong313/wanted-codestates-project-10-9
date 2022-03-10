@@ -12,15 +12,24 @@ function App() {
     <Router>
       <GlobalStyles />
       <Wrapper>
-        {/* <ToastContainer> */}
         <Container>
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/addreview" element={<AddReview />} />
           </Routes>
         </Container>
-        {/* </ToastContainer> */}
       </Wrapper>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </Router>
   );
 }
