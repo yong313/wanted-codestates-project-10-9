@@ -4,8 +4,6 @@ import GlobalStyles from './GlobalStyles';
 import Main from './pages/Main';
 import AddReview from './pages/AddReview';
 import styled from 'styled-components';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -38,7 +36,7 @@ export default App;
 
 const Wrapper = styled.div`
   width: 100vw;
-  height: 100vh;
+  /* height: 100vh; */
   display: flex;
   justify-content: center;
   align-items: center;
