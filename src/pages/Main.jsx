@@ -1,5 +1,15 @@
 import React from 'react';
+import styled from 'styled-components';
+import GridList from '../components/GridList';
 
 export default function Main() {
-  return <div>Main</div>;
+  return (
+    <Wrapper>
+      <GridList />
+    </Wrapper>
+  );
 }
+
+const Wrapper = styled.div`
+  width: 100%;
+`;
