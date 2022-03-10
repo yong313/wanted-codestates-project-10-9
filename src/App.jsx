@@ -11,13 +11,13 @@ function App() {
     <Router>
       <GlobalStyles />
       <Wrapper>
-        <ToastContainer>
-          <Container>
-            <Routes>
-              <Route path="/" element={<Main />} />
-            </Routes>
-          </Container>
-        </ToastContainer>
+        {/* <ToastContainer> */}
+        <Container>
+          <Routes>
+            <Route path="/" element={<Main />} />
+          </Routes>
+        </Container>
+        {/* </ToastContainer> */}
       </Wrapper>
     </Router>
   );
