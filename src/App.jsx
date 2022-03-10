@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import GlobalStyles from './GlobalStyles';
 import Main from './pages/Main';
+import AddReview from './pages/AddReview';
 import styled from 'styled-components';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -15,6 +16,7 @@ function App() {
         <Container>
           <Routes>
             <Route path="/" element={<Main />} />
+            <Route path="/addreview" element={<AddReview />} />
           </Routes>
         </Container>
         {/* </ToastContainer> */}
