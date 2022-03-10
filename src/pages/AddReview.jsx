@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from '../common/Button';
+import NavBar from '../common/NavBar';
 
 const AddReview = () => {
   return (
     <>
       <Container>
+        <NavBar />
         <Button title="리뷰 등록하기" />
       </Container>
     </>

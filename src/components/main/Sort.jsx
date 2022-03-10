@@ -34,9 +34,8 @@ export default function Sort() {
     <div>
       <SortBar px2Rem={px2Rem}>
         {criterias.map((text, idx) => (
-          <div style={{ width: '80%' }}>
+          <div key={idx} style={{ width: '80%' }}>
             <TextWrapper
-              key={idx}
               state={stateArr[idx]}
               px2Rem={px2Rem}
               onClick={() => setOnClick(idx)}
@@ -55,7 +54,7 @@ const SortBar = styled.div`
     display: flex;
     align-items: center;
     width: 100%;
-    position: absolute;
+
     height: ${px2Rem(83)};
     top: ${px2Rem(78)};
     background: #f9f9f9;
