@@ -18,6 +18,13 @@ const initialState = [
     rating: null,
     title: null,
     content: null,
+    comments: [
+      {
+        // 댓글
+        nickname: null,
+        comment: null,
+      },
+    ],
     date: null, // 등록시 생성, 더미는 랜덤 date
     likes: null, // boolean
     reviewCount: null, // 더미생성시 랜덤

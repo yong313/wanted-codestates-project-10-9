@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import GlobalStyles from './GlobalStyles';
 import Main from './pages/Main';
+import AddReview from './pages/AddReview';
 import styled from 'styled-components';
 
 function App() {
@@ -12,9 +13,21 @@ function App() {
         <Container>
           <Routes>
             <Route path="/" element={<Main />} />
+            <Route path="/addreview" element={<AddReview />} />
           </Routes>
         </Container>
       </Wrapper>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </Router>
   );
 }
