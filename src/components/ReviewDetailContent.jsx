@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import {
   FaHeart,
@@ -10,7 +10,12 @@ import {
 import Img1 from '../assets/pic1.jpeg';
 
 function ReviewDetailContent() {
-  console.log('');
+  const [isLiked, setIsLiked] = useState(false);
+
+  const onClickLikeButton = () => {
+    setIsLiked((prev) => !prev);
+  };
+
   return (
     <ContentWrapper>
       <Top>
@@ -20,34 +25,37 @@ function ReviewDetailContent() {
       <ImageWrapper>
         <img src={Img1} alt="리뷰_이미지_1" />
       </ImageWrapper>
-      <div>
-        <button>
-          <FaRegHeart />
-        </button>
-        <button>
-          <FaShareAlt />
-        </button>
-      </div>
-      <div>
-        <FaStar />
-        <FaStar />
-        <FaStar />
-        <FaStar />
-        <FaStar />
-      </div>
-      <div>
-        <p>
-          리뷰평
-          <br />
-          어쩌구 저쩌구 ~!
-        </p>
-      </div>
+      <ImageInfoBox>
+        <div>
+          <StyledButton onClick={onClickLikeButton}>
+            {isLiked ? <FaRegHeart /> : <FaHeart />}
+          </StyledButton>
+          <StyledButton style={{ marginLeft: '0.3rem' }}>
+            <FaShareAlt />
+          </StyledButton>
+        </div>
+        <Rating>
+          <FaStar fill="#FFF684" />
+          <FaStar fill="#FFF684" />
+          <FaStar fill="#FFF684" />
+          <FaStar fill="#FFF684" />
+          <FaStar fill="#efefef" />
+        </Rating>
+        <ReviewContent>
+          <p>
+            리뷰평
+            <br />
+            어쩌구 저쩌구 ~!
+          </p>
+        </ReviewContent>
+      </ImageInfoBox>
     </ContentWrapper>
   );
 }
 const ContentWrapper = styled.section`
   width: 100%;
   height: 100%;
+  margin-top: 3rem;
 `;
 
 const Top = styled.div`
@@ -75,6 +83,39 @@ const ImageWrapper = styled.div`
 
   img {
     width: inherit;
+  }
+`;
+const ImageInfoBox = styled.div`
+  width: 100%;
+  padding: 0 1rem;
+`;
+const StyledButton = styled.button`
+  width: 2.2rem;
+  height: 2.2rem;
+  padding: 0.35rem;
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+`;
+const Rating = styled.div`
+  padding: 0.4rem 0 0.6rem 0;
+
+  svg {
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+`;
+
+const ReviewContent = styled.div`
+  width: 100%;
+  height: auto;
+  padding-bottom: 1.5rem;
+  p {
+    font-size: 1rem;
+    line-height: 1.4rem;
+    width: 100%;
+    height: auto;
   }
 `;
 
