@@ -17,7 +17,12 @@ function NavBar({ content }) {
 }
 
 const NavWrapper = styled.nav`
+  position: fixed;
+  top: 0;
+  box-shadow: 0px 0px 3px #ccc;
+  z-index: 99;
   width: 100%;
+  max-width: 500px;
   height: 50px;
   padding: 0 0.4rem;
   display: flex;
