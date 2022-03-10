@@ -6,21 +6,32 @@ import AddReview from './pages/AddReview';
 import styled from 'styled-components';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ReviewDetail from './pages/ReviewDetail';
 
 function App() {
   return (
     <Router>
       <GlobalStyles />
       <Wrapper>
-        {/* <ToastContainer> */}
         <Container>
           <Routes>
             <Route path="/" element={<Main />} />
+            <Route path="/review-detail" element={<ReviewDetail />} />
             <Route path="/addreview" element={<AddReview />} />
           </Routes>
         </Container>
-        {/* </ToastContainer> */}
       </Wrapper>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </Router>
   );
 }
@@ -29,7 +40,7 @@ export default App;
 
 const Wrapper = styled.div`
   width: 100vw;
-  height: 100vh;
+  /* height: 100vh; */
   display: flex;
   justify-content: center;
   align-items: center;
