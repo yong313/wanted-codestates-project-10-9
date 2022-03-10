@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
 import AddComments from './AddComments';
 
 const CommentBox = () => {
+  const userAddNickname = useRef('');
+  const userAddComment = useRef('');
+
   const [pushComment, setPushComment] = useState(false);
-  const [infoCommnet, setInfoCommnet] = useState(false);
+  const [addUserComment, setAddUserComment] = useState(false);
+
   return (
     <>
       <Container>
@@ -24,9 +29,12 @@ const CommentBox = () => {
         {/* 닉네임 댓글 작성 영역 */}
         <WriteCommentBox>
           <ContentBox>
-            <NickName placeholder="닉네임"></NickName>
-            <WriteComment placeholder="댓글을 입력해주세요 ✨"></WriteComment>
-            <SendBtn disabled={!infoCommnet}>게시</SendBtn>
+            <NickName placeholder="닉네임" ref={userAddNickname} />
+            <WriteComment
+              placeholder="댓글을 입력해주세요 ✨"
+              ref={userAddComment}
+            />
+            <SendBtn disabled={addUserComment}>게시</SendBtn>
           </ContentBox>
         </WriteCommentBox>
       </Container>
@@ -45,7 +53,6 @@ const CommentList = Styled.div`
   height: auto;
   max-height: 375px;
   overflow: scroll;
-  background-color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -74,20 +81,22 @@ const WriteCommentBox = Styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0 20px;
 `;
 
 const ContentBox = Styled(WriteCommentBox)`
-  width: 93%;
+  width: 100%;
   height: 50px;
   background-color: #fff;
-  border-radius: 50px;
+  border: 1px solid #ccc;
+  border-radius: 4rem;
   overflow: hidden;
+  padding: 0;
 `;
 
 const NickName = Styled.input`
   width: 20%;
   height: 100%;
-  padding-left: 10px;
   text-align: center;
 
   ::placeholder {
