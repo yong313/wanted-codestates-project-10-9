@@ -1,38 +1,40 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
-import {
-  Star1,
-  Star2,
-  Star3,
-  Star4,
-  Star5,
-  FilledStar1,
-  FilledStar2,
-  FilledStar3,
-  FilledStar4,
-  FilledStar5,
-} from '../../Image.js';
+import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 
 function Stars() {
+  const starRef = useRef();
+  const [showStar, setShowStar] = useState(false);
+  const [mousePosition, setMousePosition] = useState(0);
+  const handleOnClick = (e) => {
+    const a =
+      Number(e.pageX) - Number(starRef.current.getBoundingClientRect().x);
+    setMousePosition(Number(a));
+    console.log(e.pageX);
+    console.log(mousePosition);
+    console.log(e.target.getBoundingClientRect());
+    console.log(Number(a));
+    console.log(starRef.current.getBoundingClientRect().x);
+  };
   return (
     <>
       <Star>
         <Rating>평점</Rating>
         <StarRating>
-          <EmptyStars>
-            <img src={Star1} alt="Star1" />
-            <img src={Star2} alt="Star1" />
-            <img src={Star3} alt="Star1" />
-            <img src={Star4} alt="Star1" />
-            <img src={Star5} alt="Star1" />
+          <EmptyStars ref={starRef}>
+            <AiOutlineStar onMouseMove={handleOnClick} />
+            <AiOutlineStar onMouseMove={handleOnClick} />
+            <AiOutlineStar onMouseMove={handleOnClick} />
+            <AiOutlineStar onMouseMove={handleOnClick} />
+            <AiOutlineStar onMouseMove={handleOnClick} />
+            <FilledStars width={mousePosition}>
+              <AiFillStar onMouseMove={handleOnClick} />
+              <AiFillStar onMouseMove={handleOnClick} />
+              <AiFillStar onMouseMove={handleOnClick} />
+              <AiFillStar onMouseMove={handleOnClick} />
+              <AiFillStar onMouseMove={handleOnClick} />
+            </FilledStars>
           </EmptyStars>
-          <FilledStars>
-            <img src={FilledStar1} alt="FilledStar1" />
-            <img src={FilledStar2} alt="FilledStar1" />
-            <img src={FilledStar3} alt="FilledStar1" />
-            <img src={FilledStar4} alt="FilledStar1" />
-            <img src={FilledStar5} alt="FilledStar1" />
-          </FilledStars>
         </StarRating>
       </Star>
     </>
@@ -52,24 +54,34 @@ const Rating = styled.h1`
 
 const StarRating = styled.div`
   display: flex;
-  justify-content: space-between;
+  position: relative;
   width: 80%;
   margin: 2rem auto;
-  & img {
+`;
+
+const EmptyStars = styled.span`
+  overflow: hidden;
+  margin: 0 auto;
+  position: relative;
+  background-color: white;
+  & svg {
     width: 3rem;
     height: 3rem;
   }
 `;
 
-const EmptyStars = styled.span`
-  width: 100%;
-  overflow: hidden;
-  display: flex;
-  justify-content: space-between;
-`;
-
 const FilledStars = styled.span`
-  display: none;
+  position: absolute;
+  max-width: ${(props) => props.width}px;
+  font-size: 3rem;
+  overflow: hidden;
+  text-overflow: hidden;
+  white-space: nowrap;
+  top: 0;
+  left: 0;
+  & svg {
+    color: gold;
+  }
 `;
 
 export default Stars;
