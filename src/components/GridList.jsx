@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import _ from 'lodash';
 
@@ -548,49 +548,52 @@ export default function GridList() {
   ];
   const showLists = lists.slice(0, quantity);
 
+  useEffect(() => {
+    handleScroll();
+  }, [quantity]);
+
   const handleScroll = () => {
+    console.log(quantity > lists.length);
+    if (quantity > lists.length) return;
     document.addEventListener(
       'scroll',
-      _.throttle(() => {
+      // 쓰로틀을통해 연속 동작제어
+      () => {
         let scrollTop = document.documentElement.scrollTop,
           windowHeight = window.innerHeight,
           height = document.body.scrollHeight - windowHeight,
           scrollPercentage = scrollTop / height;
-        let newQuantity = quantity + 1;
-        if (scrollPercentage > 0.9 && newQuantity < lists.length) {
-          console.log(newQuantity);
-          console.log('length', lists.length);
+        if (scrollPercentage === 1 && quantity < lists.length) {
+          let newQuantity = quantity + 10;
+          console.log('length:', lists.length, 'quantity:', quantity);
+
           setQuantity(newQuantity);
         }
-      }, 500),
+      },
     );
-    // let scrollTop = document.documentElement.scrollTop,
-    //   windowHeight = window.innerHeight,
-    //   height = document.body.scrollHeight - windowHeight,
-    //   scrollPercentage = scrollTop / height;
-    // console.log(scrollTop);
-    // console.log(windowHeight);
-    // console.log(scrollPercentage);
   };
   // console.log('render');
-  handleScroll();
-
+  // handleScroll();
   const imgClickHandler = (e) => {
-    console.log(e.target.lat);
+    console.log(e.target.alt);
   };
   return (
     <Container>
-      {showLists.map((list, idx) => (
-        <Img
-          key={idx}
-          src={list.imgUrl}
-          alt={list.id}
-          onClick={imgClickHandler}
-        ></Img>
-      ))}
+      <Images showLists={showLists} onClick={imgClickHandler} />
     </Container>
   );
 }
+
+const Images = ({ showLists, imgClickHandler }) => {
+  return showLists.map((list, idx) => (
+    <Img
+      key={idx}
+      src={list.imgUrl}
+      alt={list.id}
+      onClick={imgClickHandler}
+    ></Img>
+  ));
+};
 
 const Container = styled.div`
   width: 100%;
