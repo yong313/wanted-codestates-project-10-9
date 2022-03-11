@@ -9,8 +9,8 @@ function ReviewDetail({ returnButtonHandler }) {
   const dispatch = useDispatch();
   const reviews = useSelector((state) => state.reviews);
   const quantity = useSelector((state) => state.viewQuantity.quantity);
-
-  const reviewsList = reviews.slice(0, quantity);
+  const startIdx = useSelector((state) => state.viewQuantity.startIdx);
+  const reviewsList = reviews.slice(startIdx, quantity);
   const handleScroll = () => {
     // if (quantity > lists.length) return;
     console.log('hii');

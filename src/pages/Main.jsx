@@ -7,15 +7,21 @@ import InfinityList from '../components/InfinityList';
 import SelectListBtn from '../components/SelectListBtn';
 import AddReviewBtn from '../components/main/AddReviewBtn';
 import ReviewDetail from './ReviewDetail';
+import { useDispatch, useSelector } from 'react-redux';
+import { setShowDetailView } from '../modules/viewQuantity';
 
 export default function Main() {
   const [showList, setShowList] = useState(true);
-  const [isReviewDetailVisible, setIsReviewDetailVisible] = useState(true);
+  // const [isReviewDetailVisible, setIsReviewDetailVisible] = useState(true);
+  const isReviewDetailVisible = useSelector(
+    (state) => state.viewQuantity.showDetailView,
+  );
+  const dispatch = useDispatch();
 
   const hideReviewDetailModal = () => {
-    setIsReviewDetailVisible(false);
+    dispatch(setShowDetailView());
   };
-
+  console.log('show?', isReviewDetailVisible);
   return (
     <Wrapper>
       {isReviewDetailVisible && (

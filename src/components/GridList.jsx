@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { addViewQuantity } from '../modules/viewQuantity';
+import {
+  addViewQuantity,
+  setShowDetailView,
+  setStartIndex,
+} from '../modules/viewQuantity';
 
 export default function GridList() {
   const quantity = useSelector((state) => state.viewQuantity.quantity);
@@ -26,7 +30,15 @@ export default function GridList() {
   };
 
   handleScroll();
-  const imgClickHandler = (e) => {};
+  const imgClickHandler = (e) => {
+    const idx = e.target.alt;
+    dispatch(setStartIndex(idx));
+    dispatch(setShowDetailView());
+  };
+  console.log(
+    'startidx',
+    useSelector((state) => state.viewQuantity.startIdx),
+  );
   return (
     <Container>
       {showLists.map((list, idx) => (
@@ -49,4 +61,7 @@ const Img = styled.img`
   margin-top: 1px;
   width: 165px;
   height: 165px;
+  :hover {
+    cursor: pointer;
+  }
 `;

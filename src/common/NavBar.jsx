@@ -9,7 +9,7 @@ function NavBar({ content, onClickHandler }) {
         <BiArrowBack style={{ width: '100%', height: '100%' }} />
       </ButtonWrapper>
       <NavTitle>{content}</NavTitle>
-      <ButtonWrapper>
+      <ButtonWrapper onClick={onClickHandler}>
         <BiX style={{ width: '100%', height: '100%' }} />
       </ButtonWrapper>
     </NavWrapper>
