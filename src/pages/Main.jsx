@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import GridList from '../components/GridList';
 import Sort from '../components/main/Sort';
-import MoveToTopBtn from '../components/MoveToTopBtn';
+import MoveToTopBtn from '../components/main/MoveToTopBtn';
 import InfinityList from '../components/InfinityList';
 import SelectListBtn from '../components/SelectListBtn';
+import AddReviewBtn from '../components/main/AddReviewBtn';
 import ReviewDetail from './ReviewDetail';
+
 export default function Main() {
   const [showList, setShowList] = useState(true);
   const [isReviewDetailVisible, setIsReviewDetailVisible] = useState(true);
@@ -27,6 +29,7 @@ export default function Main() {
         </>
       )}
       <MoveToTopBtn />
+      <AddReviewBtn />
     </Wrapper>
   );
 }

@@ -18,7 +18,7 @@ export default function GridList() {
         windowHeight = window.innerHeight,
         height = document.body.scrollHeight - windowHeight,
         scrollPercentage = scrollTop / height;
-      if (scrollPercentage === 1 && quantity < lists.length) {
+      if (scrollPercentage >= 1 && quantity < lists.length) {
         // 전역상태관리를 통해 quantity 초기화 방지
         dispatch(addViewQuantity());
       }

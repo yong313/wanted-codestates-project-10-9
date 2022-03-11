@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { addViewQuantity } from '../modules/viewQuantity';
+import ReviewDetailContent from './ReviewDetailContent';
+import CommentBox from './comments/CommentBox';
 
 export default function InfinityList() {
   const quantity = useSelector((state) => state.viewQuantity.quantity);
@@ -10,6 +12,7 @@ export default function InfinityList() {
   const dispatch = useDispatch();
 
   console.log(useSelector((state) => state.reviews));
+
   const handleScroll = () => {
     // if (quantity > lists.length) return;
 
@@ -18,7 +21,8 @@ export default function InfinityList() {
         windowHeight = window.innerHeight,
         height = document.body.scrollHeight - windowHeight,
         scrollPercentage = scrollTop / height;
-      if (scrollPercentage === 1 && quantity < lists.length) {
+
+      if (scrollPercentage >= 1 && quantity < lists.length) {
         // 전역상태관리를 통해 quantity 초기화 방지
         dispatch(addViewQuantity());
       }
@@ -29,10 +33,12 @@ export default function InfinityList() {
   const imgClickHandler = (e) => {};
   return (
     <Container>
-      LIST
-      {/* {showLists.map((list, idx) => (
-        <Img key={idx} src={list.imgUrl} alt={idx} onClick={imgClickHandler} />
-      ))} */}
+      {showLists.map((list, idx) => (
+        <div key={list.id}>
+          <ReviewDetailContent review={list} />
+          <CommentBox comment={list.comments} />
+        </div>
+      ))}
     </Container>
   );
 }
