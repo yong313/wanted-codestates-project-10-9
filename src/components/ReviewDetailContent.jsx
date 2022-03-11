@@ -19,8 +19,8 @@ const ReviewDetailContent = React.memo(function ReviewDetailContent(props) {
   return (
     <ContentWrapper>
       <Top>
-        <Title>{props.review.title}</Title>
-        <Date>{props.review.date.toString()}</Date>
+        <Title>제목: {props.review.title}</Title>
+        <Date>{props.review.date.toISOString().split('T')[0]}</Date>
       </Top>
       <ImageWrapper>
         <img src={props.review.imgUrl} alt={`리뷰_이미지_${props.review.id}`} />
@@ -28,7 +28,7 @@ const ReviewDetailContent = React.memo(function ReviewDetailContent(props) {
       <ImageInfoBox>
         <div>
           <StyledButton onClick={onClickLikeButton}>
-            {isLiked ? <FaRegHeart /> : <FaHeart />}
+            {isLiked ? <FaHeart fill="red" /> : <FaHeart fill="#efefef" />}
           </StyledButton>
           <StyledButton style={{ marginLeft: '0.3rem' }}>
             <FaShareAlt />
@@ -57,20 +57,21 @@ const ReviewDetailContent = React.memo(function ReviewDetailContent(props) {
 const ContentWrapper = styled.section`
   width: 100%;
   height: 100%;
-  margin-top: 3rem;
 `;
 
 const Top = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 1.3rem 1rem;
+  padding: 1.6rem 1rem;
   background-color: #fff;
+  margin-top: 0.5rem;
 `;
 
 const Title = styled.p`
   text-align: center;
   font-size: 1.1rem;
+  font-weight: 600;
   line-height: 1.1rem;
 `;
 const Date = styled.p`
