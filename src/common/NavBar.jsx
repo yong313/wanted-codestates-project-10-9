@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { BiArrowBack, BiX } from 'react-icons/bi';
 
-function NavBar({ content }) {
+function NavBar({ content, onClickHandler }) {
   return (
     <NavWrapper>
-      <ButtonWrapper>
+      <ButtonWrapper onClick={onClickHandler}>
         <BiArrowBack style={{ width: '100%', height: '100%' }} />
       </ButtonWrapper>
       <NavTitle>{content}</NavTitle>
@@ -23,8 +23,8 @@ const NavWrapper = styled.nav`
   z-index: 99;
   width: 100%;
   max-width: 500px;
-  height: 50px;
-  padding: 0 0.4rem;
+  height: 4rem;
+  padding: 0 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
