@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import NavBar from '../common/NavBar';
 import CommentBox from '../components/comments/CommentBox';
@@ -45,7 +46,12 @@ const dummyReviewData = [
 ];
 
 function ReviewDetail() {
-  const [reviews, setReviews] = useState(dummyReviewData);
+  // const [reviews, setReviews] = useState(dummyReviewData);
+
+  const reviews = useSelector((state) => state.reviews);
+  // useEffect(() => {
+  //   console.log(reviews);
+  // }, []);
 
   return (
     <div>
