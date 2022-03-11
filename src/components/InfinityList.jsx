@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { addViewQuantity } from '../modules/viewQuantity';
+import ReviewDetailContent from './ReviewDetailContent';
+import CommentBox from './comments/CommentBox';
 
 export default function InfinityList() {
   const quantity = useSelector((state) => state.viewQuantity.quantity);
   const lists = useSelector((state) => state.reviews);
   const showLists = lists.slice(0, quantity);
   const dispatch = useDispatch();
-
   console.log(useSelector((state) => state.reviews));
   const handleScroll = () => {
     // if (quantity > lists.length) return;
@@ -29,10 +30,12 @@ export default function InfinityList() {
   const imgClickHandler = (e) => {};
   return (
     <Container>
-      LIST
-      {/* {showLists.map((list, idx) => (
-        <Img key={idx} src={list.imgUrl} alt={idx} onClick={imgClickHandler} />
-      ))} */}
+      {showLists.map((list, idx) => (
+        <div key={list.id}>
+          <ReviewDetailContent review={list} />
+          <CommentBox comment={list.comments} />
+        </div>
+      ))}
     </Container>
   );
 }
