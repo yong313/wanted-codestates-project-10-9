@@ -20,6 +20,7 @@ const GlobalStyles = createGlobalStyle`
     }
     input {
       border: none;
+      outline: none;
     }
     button {
       border: none;
