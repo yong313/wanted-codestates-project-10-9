@@ -10,7 +10,9 @@ export default function InfinityList() {
   const lists = useSelector((state) => state.reviews);
   const showLists = lists.slice(0, quantity);
   const dispatch = useDispatch();
+
   console.log(useSelector((state) => state.reviews));
+
   const handleScroll = () => {
     // if (quantity > lists.length) return;
 
@@ -19,7 +21,8 @@ export default function InfinityList() {
         windowHeight = window.innerHeight,
         height = document.body.scrollHeight - windowHeight,
         scrollPercentage = scrollTop / height;
-      if (scrollPercentage === 1 && quantity < lists.length) {
+
+      if (scrollPercentage >= 1 && quantity < lists.length) {
         // 전역상태관리를 통해 quantity 초기화 방지
         dispatch(addViewQuantity());
       }
