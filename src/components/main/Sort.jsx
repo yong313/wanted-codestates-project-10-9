@@ -20,7 +20,6 @@ const MockApi = class {
 };
 const api = new MockApi();
 api.dataCnt = 20;
-
 export default function Sort() {
   const [lists, setLists] = useState(api.dataArr);
   const [stateArr, setStateArr] = useState([true, false, false]);
@@ -32,21 +31,31 @@ export default function Sort() {
           text: '전체',
           sort: () => setLists((prev) => [...prev.sort((a, b) => b.id - a.id)]),
           setState: (idx) => {
-            setStateArr((prev) => prev.map(() => false).map((_, i) => i === idx && true));
+            setStateArr((prev) =>
+              prev.map(() => false).map((_, i) => i === idx && true),
+            );
           },
         },
         1: {
           text: '최신순',
-          sort: () => setLists((prev) => [...prev.sort((a, b) => b.date - a.date)]),
+          sort: () =>
+            setLists((prev) => [...prev.sort((a, b) => b.date - a.date)]),
           setState: (idx) => {
-            setStateArr((prev) => prev.map(() => false).map((_, i) => i === idx && true));
+            setStateArr((prev) =>
+              prev.map(() => false).map((_, i) => i === idx && true),
+            );
           },
         },
         2: {
           text: '리뷰 카운트순',
-          sort: () => setLists((prev) => [...prev.sort((a, b) => b.reviewCount - a.reviewCount)]),
+          sort: () =>
+            setLists((prev) => [
+              ...prev.sort((a, b) => b.reviewCount - a.reviewCount),
+            ]),
           setState: (idx) => {
-            setStateArr((prev) => prev.map(() => false).map((_, i) => i === idx && true));
+            setStateArr((prev) =>
+              prev.map(() => false).map((_, i) => i === idx && true),
+            );
           },
         },
       },
@@ -61,18 +70,24 @@ export default function Sort() {
       this.table[0][idx]?.sort();
     },
   };
-  //   console.log(lists);
+  console.log(lists);
   return (
     <div>
       <SortBar px2Rem={px2Rem}>
         {criterias.data.map((obj, idx) => (
           <div key={idx} style={{ width: '80%' }}>
-            <TextWrapper state={stateArr[idx]} px2Rem={px2Rem} onClick={() => criterias.setOnClick(idx)}>
+            <TextWrapper
+              state={stateArr[idx]}
+              px2Rem={px2Rem}
+              onClick={() => criterias.setOnClick(idx)}
+            >
               {obj.text}
             </TextWrapper>
           </div>
         ))}
-        <GrPowerReset style={{ width: '20%', marginRight: '0.5rem', cursor: 'pointer' }} />
+        <GrPowerReset
+          style={{ width: '20%', marginRight: '0.5rem', cursor: 'pointer' }}
+        />
       </SortBar>
     </div>
   );

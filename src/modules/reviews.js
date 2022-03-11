@@ -20,11 +20,15 @@ const MockApi = class {
     return this.#dataArr;
   }
   set dataCnt(cnt) {
-    for (let i = 0; i < cnt; i++) {
+    for (let i = 200; i < cnt; i++) {
       this.#dataArr.push({
         id: this.#id++,
-        date: new Date(),
-        imgUrl: `https://picsum.photos/${this.#id}/237/200/300`,
+        date: new Date(
+          2022,
+          parseInt(Math.random() * (12 - 1)) + 1,
+          parseInt(Math.random() * (31 - 1)) + 1,
+        ),
+        imgUrl: `https://picsum.photos/id/${this.#id}/200/300`,
         rating: parseInt(Math.random() * 5) + 1, // number
         title: '좋아요',
         content: `사이즈 s랑 고민했는데 xs 해도 넉넉하게 잘 맞았어요!!! 너무이쁘고 질도 다른 브랜드랑 비교했을때 튼튼하고 좋았어요 너무 만족합니다`,
@@ -36,14 +40,14 @@ const MockApi = class {
           },
         ],
         likes: false, // boolean
-        reviewCount: null, // 더미생성시 랜덤
+        reviewCount: parseInt(Math.random() * 100) + 1, // 더미생성시 랜덤
       });
     }
   }
 };
 
 const api = new MockApi();
-api.dataCnt = 150;
+api.dataCnt = 400;
 
 const initialState = [...api.dataArr];
 

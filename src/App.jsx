@@ -49,5 +49,5 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   max-width: 500px;
-  background-color: pink;
+  /* background-color: pink; */
 `;
