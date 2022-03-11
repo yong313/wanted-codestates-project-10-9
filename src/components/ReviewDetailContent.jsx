@@ -7,7 +7,6 @@ import {
   FaRegStar,
   FaStar,
 } from 'react-icons/fa';
-import Img1 from '../assets/pic1.jpeg';
 
 const ReviewDetailContent = React.memo(function ReviewDetailContent(props) {
   const [isLiked, setIsLiked] = useState(false);
@@ -16,15 +15,12 @@ const ReviewDetailContent = React.memo(function ReviewDetailContent(props) {
   const onClickLikeButton = () => {
     setIsLiked((prev) => !prev);
   };
-  useEffect(() => {
-    console.log(props.review);
-  }, []);
 
   return (
     <ContentWrapper>
       <Top>
         <Title>{props.review.title}</Title>
-        <Date>{props.review.date}</Date>
+        <Date>{props.review.date.toString()}</Date>
       </Top>
       <ImageWrapper>
         <img src={props.review.imgUrl} alt={`리뷰_이미지_${props.review.id}`} />
