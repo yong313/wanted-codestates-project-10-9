@@ -6,13 +6,13 @@ import {
   setShowDetailView,
   setStartIndex,
 } from '../modules/viewQuantity';
+import { sortReview } from '../modules/reviews';
 
 export default function GridList() {
   const quantity = useSelector((state) => state.viewQuantity.quantity);
   const lists = useSelector((state) => state.reviews);
   const showLists = lists.slice(0, quantity);
   const dispatch = useDispatch();
-
   console.log(useSelector((state) => state.reviews));
   const handleScroll = () => {
     // if (quantity > lists.length) return;
@@ -39,6 +39,11 @@ export default function GridList() {
     'startidx',
     useSelector((state) => state.viewQuantity.startIdx),
   );
+
+  useEffect(() => {
+    dispatch(sortReview(0));
+  }, []);
+
   return (
     <Container>
       {showLists.map((list, idx) => (
