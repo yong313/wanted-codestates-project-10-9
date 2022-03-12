@@ -1,72 +1,46 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import px2Rem from '../utils/pxToRem';
-import { GrPowerReset } from 'react-icons/gr';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectAll, selectRecent, selectCnt } from '../../modules/sort';
+import { selectRecent, selectCnt, selectRandom } from '../../modules/sort';
 import { toast } from 'react-toastify';
 import { sortReview } from '../../modules/reviews';
 
 export default function Sort() {
-  const datas = useSelector((state) => state.reviews);
   const dispatch = useDispatch();
-
-  const textArr = ['전체', '최신순', '리뷰카운트순'];
+  const textArr = ['최신순', '리뷰카운트순', '랜덤순'];
   const selectSort = useSelector((state) => state.sort);
-  // const criterias = {
-  //   table: [
-  //     {
-  //       0: {
-  //         text: ,
-  //         // sort: () => setLists((prev) => [...prev.sort((a, b) => b.id - a.id)]),
-  //       },
-  //       1: {
-  //         text:,
-  //         // sort: () => setLists((prev) => [...prev.sort((a, b) => b.date - a.date)]),
-  //       },
-  //       2: {
-  //         text: ,
-  //         // sort: () => setLists((prev) => [...prev.sort((a, b) => b.reviewCount - a.reviewCount)]),
-  //       },
-  //     },
-  //   ],
-  //   get data() {
-  //     const arr = [];
-  //     for (let idx = 0; idx < 3; idx++) arr.push(this.table[0][idx]);
-  //     return arr;
-  //   },
-  //   setOnClick(idx) {
-  //     this.table[0][idx]?.sort();
-  //   },
-  // };
   const setOnclickHandler = (e) => {
     switch (e.target.innerText) {
-      case '전체':
-        dispatch(sortReview(0));
-        return dispatch(selectAll());
       case '최신순':
-        dispatch(sortReview(1));
+        dispatch(sortReview(0));
         return dispatch(selectRecent());
       case '리뷰카운트순':
-        dispatch(sortReview(2));
+        dispatch(sortReview(1));
         return dispatch(selectCnt());
+      case '랜덤순':
+        dispatch(sortReview(2));
+        return dispatch(selectRandom());
       default:
         toast.error('잘못된 클릭입니다.');
     }
   };
 
-  // () => criterias.setOnClick(idx)
   return (
     <div>
       <SortBar px2Rem={px2Rem}>
         {textArr.map((text, idx) => (
           <div key={idx} style={{ width: '80%' }}>
-            <TextWrapper selectSort={selectSort} idx={idx} px2Rem={px2Rem} onClick={setOnclickHandler}>
+            <TextWrapper
+              selectSort={selectSort}
+              idx={idx}
+              px2Rem={px2Rem}
+              onClick={setOnclickHandler}
+            >
               {text}
             </TextWrapper>
           </div>
         ))}
-        <GrPowerReset style={{ width: '20%', marginRight: '0.5rem', cursor: 'pointer' }} />
       </SortBar>
     </div>
   );
@@ -89,7 +63,7 @@ const TextWrapper = styled.p`
     justify-content: center;
     height: ${px2Rem(50)};
     border-radius: 3rem;
-    margin-left: 0.5rem;
+    margin: 0 0.5rem;
     padding: 1rem;
   `}
   ${({ idx, selectSort }) => {

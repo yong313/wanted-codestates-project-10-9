@@ -29,7 +29,11 @@ const MockApi = class {
     for (let i = 200; i < cnt; i++) {
       this.#dataArr.push({
         id: this.#id++,
-        date: new Date(2022, parseInt(Math.random() * (12 - 1)) + 1, parseInt(Math.random() * (31 - 1)) + 1),
+        date: new Date(
+          2022,
+          parseInt(Math.random() * (12 - 1)) + 1,
+          parseInt(Math.random() * (31 - 1)) + 1,
+        ),
         imgUrl: `https://picsum.photos/id/${this.#id}/200/300`,
         rating: parseInt(Math.random() * 5) + 1, // number
         title: '좋아요',
@@ -86,15 +90,17 @@ export default function submit(state = initialState, action) {
     case SORT_REVIEW:
       switch (action.bySort) {
         case 0:
-          return [...state.sort((a, b) => a.id - b.id)];
+          return [...state.sort((a, b) => b.date - a.date)];
         case 1:
-          return [...state.sort((a, b) => b.date.getTime() - a.date.getTime())];
-        case 2:
           return [...state.sort((a, b) => b.reviewCount - a.reviewCount)];
+        case 2:
+          const target = ['id', 'rating', 'date', 'reviewCount'][
+            parseInt(Math.random() * 3)
+          ];
+          return [...state.sort((a, b) => b[target] - a[target])];
         default:
           return;
       }
-
     default:
       return state;
   }
