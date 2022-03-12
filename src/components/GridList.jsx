@@ -7,6 +7,7 @@ import {
   setStartIndex,
   setShowMoveToTopBtn,
 } from '../modules/viewQuantity';
+import { sortReview } from '../modules/reviews';
 
 export default function GridList() {
   const quantity = useSelector((state) => state.viewQuantity.quantity);
@@ -46,6 +47,12 @@ export default function GridList() {
     dispatch(setStartIndex(idx));
     dispatch(setShowDetailView());
   };
+
+
+  useEffect(() => {
+    dispatch(sortReview(0));
+  }, []);
+
 
   return (
     <Container>
