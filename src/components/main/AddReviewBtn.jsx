@@ -2,18 +2,19 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { BiPlus } from 'react-icons/bi';
+import { css } from 'styled-components';
 export default function AddReviewBtn() {
   const [onMouse, setOnMouse] = useState(false);
   const navigate = useNavigate();
+
   const buttonHandler = (e) => {
-    console.log(e.type);
     switch (e.type) {
       case 'click':
         return navigate('/addreview');
-      case 'mouseenter':
-        return setOnMouse(true);
       case 'mouseleave':
         return setOnMouse(false);
+      case 'mousemove':
+        return setOnMouse(true);
       default:
         return;
     }
@@ -23,14 +24,11 @@ export default function AddReviewBtn() {
     <>
       <Button
         onClick={buttonHandler}
-        onMouseEnter={buttonHandler}
         onMouseLeave={buttonHandler}
+        onMouseMove={buttonHandler}
+        onMouse={onMouse}
       >
-        {onMouse ? (
-          <Text onMouse={onMouse}>리뷰등록</Text>
-        ) : (
-          <BiPlus className="plus" />
-        )}
+        {onMouse ? <span>리뷰등록</span> : <BiPlus className="plus" />}
       </Button>
     </>
   );
@@ -50,15 +48,29 @@ const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-
+  transition: 0.2s;
+  span {
+    position: absolute;
+    width: 100px;
+    opacity: 0;
+    font-size: 1111px;
+    transition: 1.3s;
+  }
   :hover {
     background-color: #000;
     width: 140px;
     margin-left: 21.8125rem;
     cursor: pointer;
   }
-`;
-
-const Text = styled.div`
-  font-size: 1.5625rem;
+  ${({ onMouse }) => {
+    console.log(onMouse);
+    if (onMouse) {
+      return css`
+        span {
+          opacity: 1;
+          font-size: 1.5625rem;
+        }
+      `;
+    }
+  }}
 `;
