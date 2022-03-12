@@ -31,6 +31,8 @@ const CommentBox = () => {
   const inputHandler = () => {
     saveComment();
     setCommentList(JSON.parse(window.localStorage.getItem('saveComment')));
+    userAddNickname.current.value = '';
+    userAddComment.current.value = '';
   };
 
   // 댓글 추가 시 스크롤 위치 하단 고정
