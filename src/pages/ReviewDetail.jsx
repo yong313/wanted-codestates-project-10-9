@@ -54,7 +54,7 @@ function ReviewDetail() {
         return (
           <div key={review.id}>
             <ReviewDetailContent review={review} />
-            <CommentBox comment={review.comments} />
+            <CommentBox idx={review.idx} setComments={review.comments} />
           </div>
         );
       })}

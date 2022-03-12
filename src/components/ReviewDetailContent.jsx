@@ -17,7 +17,7 @@ const ReviewDetailContent = React.memo(function ReviewDetailContent(props) {
     setIsLiked((prev) => !prev);
   };
   useEffect(() => {
-    console.log(props.review);
+    // console.log(props.review);
   }, []);
 
   return (

@@ -8,7 +8,7 @@ export const addReview = (review) => ({
   review,
 });
 
-export const addComment = (comments, idx) => ({
+export const addComment = (idx, comments) => ({
   type: ADD_COMMENT,
   comments,
 });
@@ -31,8 +31,8 @@ const MockApi = class {
         comments: [
           {
             // 댓글
-            nickname: null,
-            comment: null,
+            userNickname: null,
+            userComment: null,
           },
         ],
         likes: false, // boolean
@@ -67,8 +67,8 @@ export default function submit(state = initialState, action) {
         comments: [
           ...state[action.idx].comments,
           {
-            nickname: action.comments.nickname,
-            comment: action.comments.comment,
+            userNickname: action.comments.nickname,
+            userComment: action.comments.comment,
           },
         ],
       };

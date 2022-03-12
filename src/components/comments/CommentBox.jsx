@@ -1,20 +1,55 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
+import { addComment } from '../../modules/reviews';
 import AddComments from './AddComments';
 
 const CommentBox = () => {
-  const userAddNickname = useRef('');
-  const userAddComment = useRef('');
+  // 댓글 인풋에 입력 된 텍스트
+  const userAddNickname = useRef(null);
+  const userAddComment = useRef(null);
 
-  const [pushComment, setPushComment] = useState(false);
-  const [addUserComment, setAddUserComment] = useState(false);
+  // 댓글 추가 시 스크롤 위치 하단 고정
+  const commentScroll = useRef();
+
+  // 로컬에 저장된 값 상태관리
+  const [commentList, setCommentList] = useState([]);
+
+  const saveComment = (e) => {
+    const userCommentArr = [
+      ...commentList,
+      {
+        userNickname: userAddNickname.current.value,
+        userComment: userAddComment.current.value,
+      },
+    ];
+    // 로컬에 저장
+    window.localStorage.setItem('saveComment', JSON.stringify(userCommentArr));
+  };
+
+  // 저장 버튼
+  const inputHandler = () => {
+    saveComment();
+    setCommentList(JSON.parse(window.localStorage.getItem('saveComment')));
+  };
+
+  // 댓글 추가 시 스크롤 위치 하단 고정
+  const scrollToBottom = () => {
+    if (commentScroll.current) {
+      commentScroll.current.scrollTop = commentScroll.current.scrollHeight;
+    }
+  };
+  useEffect(() => {
+    scrollToBottom();
+  }, [commentList.length]);
 
   return (
     <>
       <Container>
-        <CommentList>
-          {pushComment ? (
+        <CommentList ref={commentScroll}>
+          {commentList.length ? (
+            <AddComments commentList={commentList} />
+          ) : (
             <NoneComment>
               <p>
                 <span>닉네임</span> 님의
@@ -22,8 +57,6 @@ const CommentBox = () => {
                 리뷰에 첫 댓글을 남겨주세요 ☺️
               </p>
             </NoneComment>
-          ) : (
-            <AddComments pushComment={pushComment} />
           )}
         </CommentList>
         {/* 닉네임 댓글 작성 영역 */}
@@ -34,7 +67,7 @@ const CommentBox = () => {
               placeholder="댓글을 입력해주세요 ✨"
               ref={userAddComment}
             />
-            <SendBtn disabled={addUserComment}>게시</SendBtn>
+            <SendBtn onClick={inputHandler}>게시</SendBtn>
           </ContentBox>
         </WriteCommentBox>
       </Container>
@@ -45,16 +78,17 @@ const CommentBox = () => {
 const Container = Styled.div`
   width: 100%;
   height: auto;
-  background-color: #ffffff;
+  max-height: 475px;
+  background-color: #f9f9f9;
 `;
 
 const CommentList = Styled.div`
   width: 100%;
   height: auto;
-  max-height: 375px;
+  max-height: 270px;
   overflow: scroll;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 `;
 
@@ -65,6 +99,7 @@ const NoneComment = Styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #fff;
   color: #ccc;
   font-size: 1.125rem;
   line-height: 1.625rem;
@@ -77,7 +112,7 @@ const NoneComment = Styled.div`
 const WriteCommentBox = Styled.div`
   width: 100%;
   height: 100px;
-  background-color: #efefef;
+  background-color: #f9f9f9;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -116,15 +151,6 @@ const SendBtn = Styled.button`
   font-weight: bold;
   transition: all 0.35s ease;
   color: #000;
-
-  ${(props) =>
-    props.disabled
-      ? `
-  color: #ccc;
-  font-weight: normal;
-  cursor: default;
-  `
-      : ``}
 `;
 
 export default CommentBox;

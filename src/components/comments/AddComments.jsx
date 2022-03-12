@@ -1,7 +1,7 @@
 import React from 'react';
 import Styled from 'styled-components';
 
-const AddComments = () => {
+const AddComments = ({ commentList }) => {
   // 댓글 작성 시간 표시 함수
   function displayedAt(createdAt) {
     const milliSeconds = new Date() - createdAt;
@@ -20,20 +20,25 @@ const AddComments = () => {
     const years = days / 365;
     return `${Math.floor(years)}년 전`;
   }
+  console.log(displayedAt(Date.now()));
 
   return (
     <>
       <Container>
-        <AddCommentsBox>
-          <NickNameArea>yong313</NickNameArea>
-          <CommentsArea>test</CommentsArea>
-        </AddCommentsBox>
-        <ToolBox>
-          <DateArea>{displayedAt()}</DateArea>
-          <ReComment>답글달기</ReComment>
-          <ToEdit>수정하기</ToEdit>
-          <DeleteComment>삭제</DeleteComment>
-        </ToolBox>
+        {commentList.map((el, idx) => (
+          <ContentsBox key={idx}>
+            <AddCommentsBox>
+              <NickNameArea>{el.userNickname}</NickNameArea>
+              <CommentsArea>{el.userComment}</CommentsArea>
+            </AddCommentsBox>
+            <ToolBox>
+              <DateArea>{displayedAt(Date.now())}</DateArea>
+              <ReComment>답글달기</ReComment>
+              <ToEdit>수정하기</ToEdit>
+              <DeleteComment>삭제</DeleteComment>
+            </ToolBox>
+          </ContentsBox>
+        ))}
       </Container>
     </>
   );
@@ -41,11 +46,16 @@ const AddComments = () => {
 
 const Container = Styled.div`
   width:100%;
-  height: auto;
+  height: 100%;
+`;
+
+const ContentsBox = Styled.div`
+  width:100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: #efefef;
-  padding: 5px 20px 0 20px;
+  background-color: #f9f9f9;
+  padding: 5px 20px;
 `;
 
 const AddCommentsBox = Styled.div`
