@@ -11,8 +11,6 @@ export default function InfinityList() {
   const showLists = lists.slice(0, quantity);
   const dispatch = useDispatch();
 
-  console.log(useSelector((state) => state.reviews));
-
   const handleScroll = () => {
     // if (quantity > lists.length) return;
 

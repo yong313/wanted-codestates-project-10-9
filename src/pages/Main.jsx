@@ -4,7 +4,8 @@ import GridList from '../components/GridList';
 import Sort from '../components/main/Sort';
 import MoveToTopBtn from '../components/main/MoveToTopBtn';
 import InfinityList from '../components/InfinityList';
-import SelectListBtn from '../components/SelectListBtn';
+import SelectListBtn from '../components/main/SelectListBtn';
+
 import AddReviewBtn from '../components/main/AddReviewBtn';
 import ReviewDetail from './ReviewDetail';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,12 +17,14 @@ export default function Main() {
   const isReviewDetailVisible = useSelector(
     (state) => state.viewQuantity.showDetailView,
   );
+  const showMoveToTopBtn = useSelector(
+    (state) => state.viewQuantity.showMoveToTopBtn,
+  );
   const dispatch = useDispatch();
 
   const hideReviewDetailModal = () => {
     dispatch(setShowDetailView());
   };
-  console.log('show?', isReviewDetailVisible);
   return (
     <Wrapper>
       {isReviewDetailVisible && (
@@ -34,7 +37,7 @@ export default function Main() {
           {showList ? <GridList /> : <InfinityList />}
         </>
       )}
-      <MoveToTopBtn />
+      {showMoveToTopBtn && <MoveToTopBtn />}
       <AddReviewBtn />
     </Wrapper>
   );
