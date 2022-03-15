@@ -1,6 +1,6 @@
 <br />
 
-## 🌈 &nbsp; wanted-codestates-project-10-7 
+## 🌈 &nbsp; wanted-codestates-project-10-9
 
 ### 📎 &nbsp; [과제링크](https://frosty-jackson-ce958f.netlify.app)
 
@@ -74,7 +74,10 @@ Figma [링크](https://www.figma.com/file/5bubLhb2Ldcg6HkTwBsADU/%ED%85%8C%EC%8A
 <details>
   <summary>복지호</summary>
   <ul>
-   <li></li>
+   리뷰 상세 페이지
+   <li>게시글 UI 구현</li>
+   <li>좋아요, 링크 기능 (추가 예정)</li>
+   <li>Redux 데이터 연결해서 게시글 나타내기</li>
   </ul>
 </details>
 <details>
