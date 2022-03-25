@@ -82,8 +82,10 @@ Figma [링크](https://www.figma.com/file/5bubLhb2Ldcg6HkTwBsADU/%ED%85%8C%EC%8A
 </details>
 <details>
   <summary>우혁주</summary>
+  리뷰 등록 페이지:
     <ul>
-      <li> </li>
+      <li>리뷰 등록 UI 구현</li>
+      <li>별점, 사진 기능 (추가 예정)</li>
     </ul>
 </details>
 <details>
