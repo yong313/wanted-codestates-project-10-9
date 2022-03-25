@@ -91,7 +91,7 @@ Figma [링크](https://www.figma.com/file/5bubLhb2Ldcg6HkTwBsADU/%ED%85%8C%EC%8A
 <details>
   <summary>전용태</summary>
   <ul>
-    <li>  </li>
+    <li>댓글 기능 구현</li>
   </ul>
 </details>
 
